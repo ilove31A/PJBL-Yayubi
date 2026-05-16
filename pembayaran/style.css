@@ -1,0 +1,246 @@
+/* ============================================================
+   style.css – Catering Yayubi | Loading Pembayaran
+   Responsive: Mobile (≤480px) | Tablet (481–1024px) | Desktop (≥1025px)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --orange:      #E8622A;
+  --orange-light:#F4895A;
+  --white:       #ffffff;
+  --gray:        #888888;
+  --green:       #25D366;
+  --green-dark:  #1DAA56;
+  --call-bg:     #FDE8D0;
+  --call-border: #F4895A;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #ffffff;
+}
+
+/* ── Page ── */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ── Outer card ── */
+.outer-card {
+  flex: 1;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Corner decorations ── */
+.corner {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.corner svg { display: block; }
+.corner-tl { top: 0; left: 0; }
+.corner-tr { top: 0; right: 0; }
+.corner-bl { bottom: 0; left: 0; }
+.corner-br { bottom: 0; right: 0; }
+
+/* ── Glow blob ── */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(216, 90, 48, 0.10);
+  filter: blur(32px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Inner card ── */
+.inner-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 40px rgba(216,90,48,0.07), 0 1px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  transition: min-height 0.4s ease;
+}
+
+/* ── States ── */
+.state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.state.active { display: flex; }
+
+/* ── Typography ── */
+.state-title { font-weight: 700; color: var(--orange); line-height: 1.3; }
+.state-sub   { color: var(--gray); font-weight: 400; }
+.info-text   { color: var(--gray); }
+
+/* ── Spinner ── */
+.spinner {
+  border: 3px solid #FBCFBC;
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin 0.85s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Check icon ── */
+.check-svg { margin-top: 4px; }
+
+/* ── Logo ── */
+.logo-wrap {
+  border-radius: 28px;
+  background: linear-gradient(145deg, #F4895A 0%, #E8622A 50%, #D44E1A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 28px rgba(212, 78, 26, 0.35);
+}
+.logo-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* ── Buttons ── */
+.btn-wa, .btn-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s ease;
+  letter-spacing: 0.01em;
+  width: 100%;
+}
+
+.btn-wa {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+}
+.btn-wa:hover  { transform: scale(1.07); box-shadow: 0 8px 28px rgba(37,211,102,0.35); background: var(--green-dark); }
+.btn-wa:active { transform: scale(0.98); }
+
+.btn-call {
+  background: var(--call-bg);
+  color: var(--orange);
+  border: 1.5px solid var(--call-border);
+  box-shadow: 0 2px 10px rgba(216,90,48,0.10);
+}
+.btn-call:hover  { transform: scale(1.07); box-shadow: 0 8px 24px rgba(216,90,48,0.20); background: #fbd9c5; }
+.btn-call:active { transform: scale(0.98); }
+
+.call-label { font-weight: 700; }
+.call-sub   { font-weight: 400; color: var(--orange); opacity: 0.75; }
+.btn-icon   { flex-shrink: 0; }
+
+
+/* ============================================================
+   MOBILE  ≤ 480px
+   ============================================================ */
+@media (max-width: 480px) {
+  .outer-card  { padding: 16px 12px; min-height: 100vh; align-items: center; }
+  .corner svg  { width: 64px; height: 64px; }
+  .blob        { width: 100px; height: 60px; bottom: 20%; right: 10%; }
+
+  .inner-card  { width: 100%; max-width: 360px; padding: 28px 20px; gap: 12px; min-height: 220px; border-radius: 16px; }
+  .state       { gap: 10px; }
+  .state-title { font-size: 16px; }
+  .state-sub   { font-size: 12px; }
+  .info-text   { font-size: 11px; margin: 2px 0 4px; }
+
+  .spinner    { width: 44px; height: 44px; }
+  .check-svg  { width: 44px; height: 44px; }
+  .logo-wrap  { width: 110px; height: 110px; padding: 8px; border-radius: 20px; margin: 4px 0 8px; }
+
+  .btn-wa, .btn-call { padding: 12px 16px; font-size: 13px; gap: 8px; max-width: 280px; }
+  .btn-icon  { width: 18px; height: 18px; }
+  .call-sub  { font-size: 10px; }
+}
+
+
+/* ============================================================
+   TABLET  481px – 1024px
+   ============================================================ */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .outer-card  { padding: 40px 24px; min-height: 100vh; align-items: center; }
+  .corner svg  { width: 100px; height: 100px; }
+  .blob        { width: 150px; height: 90px; bottom: 20%; right: 18%; }
+
+  .inner-card  { width: 100%; max-width: 480px; padding: 40px 36px; gap: 14px; min-height: 280px; border-radius: 18px; }
+  .state       { gap: 12px; }
+  .state-title { font-size: 19px; }
+  .state-sub   { font-size: 13px; }
+  .info-text   { font-size: 12px; margin: 2px 0 6px; }
+
+  .spinner    { width: 52px; height: 52px; }
+  .check-svg  { width: 52px; height: 52px; }
+  .logo-wrap  { width: 130px; height: 130px; padding: 10px; border-radius: 24px; margin: 4px 0 8px; }
+
+  .btn-wa, .btn-call { padding: 13px 22px; font-size: 14px; gap: 9px; max-width: 300px; }
+  .btn-icon  { width: 20px; height: 20px; }
+  .call-sub  { font-size: 10px; }
+}
+
+
+/* ============================================================
+   DESKTOP  ≥ 1025px
+   ============================================================ */
+@media (min-width: 1025px) {
+  .outer-card  { padding: 80px 60px; min-height: 100vh; align-items: center; }
+  .corner svg  { width: 160px; height: 160px; }
+  .blob        { width: 220px; height: 120px; bottom: 18%; right: 20%; }
+
+  .inner-card  { width: 100%; max-width: 600px; padding: 64px 80px; gap: 18px; min-height: 360px; border-radius: 18px; }
+  .state       { gap: 14px; }
+  .state-title { font-size: 22px; }
+  .state-sub   { font-size: 14px; }
+  .info-text   { font-size: 13px; margin: 2px 0 4px; }
+
+  .spinner    { width: 60px; height: 60px; }
+  .check-svg  { width: 58px; height: 58px; }
+  .logo-wrap  { width: 155px; height: 155px; padding: 12px; border-radius: 28px; margin: 4px 0 8px; }
+
+  .btn-wa, .btn-call { padding: 15px 28px; font-size: 15px; gap: 10px; max-width: 320px; }
+  .btn-icon  { width: 22px; height: 22px; }
+  .call-sub  { font-size: 11px; }
+}
